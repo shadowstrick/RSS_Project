@@ -43,9 +43,9 @@ public class ManageRSS extends IWindow{
 		{
 			Feed	f = (Feed) l.get(i);
 			
-				tab[i][0] = f.title;
-				tab[i][1] = f.link;
-				tab[i][2] = f.description;	
+			tab[i][0] = f.title;
+			tab[i][1] = f.link;
+			tab[i][2] = f.description;	
 		}
 		
 		table = new JTable(tab, entetes);
@@ -81,8 +81,7 @@ public class ManageRSS extends IWindow{
 			c.deleteRSS(table.getSelectedRow());
 			id = Controler.manageRSSId;
 		}
-		
-		
+
 		c.GoNextView(id);
 	}
 }

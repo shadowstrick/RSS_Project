@@ -66,7 +66,10 @@ public class Search extends IWindow {
 	
 	public void	GoNextView(int id, String buttonName)
 	{
-		c.GoNextView(id);
+		if (id == Controler.mainMenuId)
+			c.GoNextView(id);
+		else
+			c.searchFeed(title.getText(), descr.getText(), url.getText());		
 	}
 	
 }

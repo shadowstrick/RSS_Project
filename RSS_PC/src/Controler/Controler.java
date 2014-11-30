@@ -207,19 +207,36 @@ public class Controler {
 			}
 			if (id != 0)
 			{
-				l = JsonTraitement.ListFeedArray(r.contents);
+				l = JsonTraitement.ListFeedArray(r.contents, (int)((Feed)(feeds.get(i))).id);
 				feedItems.addAll(l);
 			}
 		}
 		return (feedItems);
 	}
 
-	public void			setRead(String id)
+	public void			setRead(int feedId, String id)
 	{
 		try{
-			_network.sendRequestGET("/feed/{feedId}/item/" + id +"/user/read/true/" + _user.username + "/" + _user.password);
+			_network.sendRequestPOST("/feed/" + feedId + "/item/user/read/true/" + _user.username + "/" + _user.password, id);
 		} catch(Exception e) {
 			
 		}
 	}
+	
+	public void			searchFeed(String title, String description, String link)
+	{
+		News	n = new News(this);
+		
+		if (title != "" || description != "" || link != "")
+		{
+			JPanel p;
+			_window.setVisible(false);
+			p = n.start(title, description, link);
+			_window.setContentPane(p);
+			_window.setVisible(true);
+		}
+		else
+			GoNextView(Controler.newsId);
+	}
+	
 }

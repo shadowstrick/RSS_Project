@@ -11,4 +11,5 @@ public class FeedItem {
 	public Date		pubDate;
 	public String	category;
 	public Boolean	read;
+	public int	id_feed;
 }

@@ -44,18 +44,20 @@ public class JsonTraitement {
 	{
 		User		u = new User();
 		JSONParser 	parser = new JSONParser();
-		JSONArray array;
+
+		Object obj;
 		try {
-			array = (JSONArray) parser.parse(s);
+			obj = parser.parse(s);
+
+		JSONObject obj2 = (JSONObject)obj;
+		u.id = (int)((long)obj2.get("id"));
+		u.username = (String)obj2.get("username");
+		u.password = (String)obj2.get("password");
+		u.email = (String)obj2.get("email");
+		return (u);
 		} catch (ParseException e) {
 			return (null);
 		}
-		
-		u.id = (int)array.get(0);
-		u.username = (String)array.get(1);
-		u.password = (String)array.get(2);
-		u.email = (String)array.get(3);
-		return (u);
 	}
 	
 	public static BasicResponse basicResponse(String s)
@@ -105,7 +107,7 @@ public class JsonTraitement {
 	    return (l);
 	}
 	
-	public static ArrayList		ListFeedArray(String s)
+	public static ArrayList		ListFeedArray(String s, int id)
 	{
 		ArrayList    		l = new ArrayList();
 
@@ -127,7 +129,7 @@ public class JsonTraitement {
 	        	 f.pubDate = (Date)obj2.get("pubDate");
 	        	 f.category = (String)obj2.get("category");
 	        	 f.read = (Boolean)obj2.get("read");
-	        	 
+	        	 f.id_feed = id;
 	        	 l.add(f);
 	         }
 	      	}catch(ParseException pe){
